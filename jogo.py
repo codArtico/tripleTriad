@@ -1,0 +1,1 @@
+from carta import Carta #POO em Python
