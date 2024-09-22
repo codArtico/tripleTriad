@@ -25,9 +25,7 @@ class Tabuleiro:
             'direita': (0, 1)
         }
 
-        somas = {
-
-        }
+        somas = []
 
         cartasAdj = {
 
@@ -56,15 +54,22 @@ class Tabuleiro:
                     print(f'Carta na posição {ax},{ay} capturada por {carta.dono} pela regra padrão!')
                 
                 soma = valorAtual+valorAdjacente
-                somas[direcao] = soma
+                somas.append = ((direcao,soma))
                 cartasAdj[direcao] = cartaAdjacente
         
-        for direcao1, soma1 in direcoes.items:
-            for direcao2, soma2 in direcoes.items:
-                if direcao1 != direcao2 and soma1 == soma2:
-                    cartaAdj1 = cartasAdj [direcao1]
-                    cartaAdj2 = cartaAdj2 [direcao2]
+        for i in range (len(somas)):
+            for j in range(i+1,len(somas)):
+                if somas[i][1] == somas [j][1]:
+                    direcao1, direcao2 = somas[i][0], somas[j][0]
+                    cartaAdj1 = cartasAdj[direcao1]
+                    cartaAdj2 = cartasAdj[direcao2]
                     cartaAdj1.dono = carta.dono
                     cartaAdj2.dono = carta.dono
-                    print(f'Capturou as cartas em {direcao1} e {direcao2} pela regra Plus!')
 
+    def isFull(self):
+        for i in range(3):
+            for j in range(3):
+                if self.slots[i][j] == None:
+                    return False
+        
+        return True
