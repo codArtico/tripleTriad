@@ -6,7 +6,7 @@ class Tabuleiro:
     def colocarCarta(self,linha,coluna,carta):
         if self.slots[linha][coluna] == None:
             self.slots[linha][coluna] = carta
-            cartasColocadas +=1
+            self.cartasColocadas +=1
             return True
         else:
             print("Jogada inválida, insira uma posição dísponível!")
@@ -40,7 +40,7 @@ class Tabuleiro:
             
             
         
-        for direcao, (dx,dy) in direcoes.items:
+        for direcao, (dx,dy) in direcoes.items():
             ax,ay = linha+dx,coluna+dy
             
             if 0 <= ax < 3 and 0 <= ay < 3 and self.slots[ax][ay]:
@@ -66,3 +66,43 @@ class Tabuleiro:
                     cartaAdj1.dono = carta.dono
                     cartaAdj2.dono = carta.dono
 
+    def imprimir_linha(self, linha):
+        """Imprime uma linha do tabuleiro formatada com alinhamento garantido e cores das cartas."""
+        if not (0 <= linha < 3):
+            raise ValueError("Índice de linha inválido. Deve estar entre 0 e 2.")
+
+        # Prepara a estrutura de linhas para cada carta na linha específica
+        linhas = [""] * 4  # 4 linhas para cada carta
+
+        for j in range(3):
+            carta = self.slots[linha][j]
+            if carta is None:
+                carta_formatada = (
+                    "__________\n"
+                    "|        |\n"
+                    "|        |\n"
+                    "|        |\n"
+                    "__________"
+                )
+            else:
+                carta_formatada = carta.formatar()
+
+            # Adiciona cada linha formatada da carta na linha correspondente da impressão do tabuleiro
+            carta_linhas = carta_formatada.split('\n')
+            for k in range(len(carta_linhas)-1):
+                if j == 0:
+                    linhas[k] = carta_linhas[k]  # Primeiro item em cada linha
+                else:
+                    linhas[k] += " " + carta_linhas[k]  # Adiciona espaço e adiciona o próximo item
+
+        # Imprime a linha formatada
+        for linha in linhas:
+            print(linha)
+        
+        print("__________ __________ __________")
+        
+        
+    def imprimir_tabuleiro(self):
+        self.imprimir_linha(0)
+        self.imprimir_linha(1)
+        self.imprimir_linha(2)

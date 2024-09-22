@@ -3,7 +3,7 @@ from deck import Deck
 from carta import Carta
 from jogador import Jogador
 from random import randint
-
+'''
 class Jogo:
 
     def escolherPlayerInicial(p1,p2):
@@ -56,3 +56,19 @@ class Jogo:
         print(f"{p1.nome} venceu")
     else:
         print("Empate")
+'''
+
+c1 = Carta()
+c2 = Carta()
+c3 = Carta()
+t = Tabuleiro()
+t.colocarCarta(0, 0, c1)
+t.colocarCarta(0, 1, c2)
+t.colocarCarta(0, 2, c3)
+t.colocarCarta(1, 0, c1)
+t.colocarCarta(1, 1, c2)
+t.colocarCarta(1, 2, c3)
+t.colocarCarta(2, 0, c1)
+t.colocarCarta(2, 1, c2)
+t.colocarCarta(2, 2, c3)
+t.imprimir_tabuleiro()
