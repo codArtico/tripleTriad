@@ -1,1 +1,2 @@
-from carta import Carta #POO em Python
+from carta import * #POO em Python
+
