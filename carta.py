@@ -1,10 +1,18 @@
+from random import randint
+
 class Carta:
-    def __init__(self, cima, direita, baixo, esquerda, dono):
+    def __init__(self):
         self.valores = {
-            'cima': cima,
-            'direita': direita,
-            'baixo': baixo,
-            'esquerda': esquerda
+            'cima': Carta.gerarValor(),
+            'direita': Carta.gerarValor(),
+            'baixo': Carta.gerarValor(),
+            'esquerda': Carta.gerarValor()
             
         }
-        self.dono = dono
+
+    def gerarValor(self):
+        v = randint(1,11)
+
+        if (v == 11):
+            return "A"
+        return v
