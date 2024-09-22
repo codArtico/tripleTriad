@@ -58,21 +58,63 @@ class Jogo:
         print("Empate")
 '''
 p1 = Jogador(Back.BLUE)
+
 p2 = Jogador(Back.RED)
+
 c1 = Carta()
-c1.setDono(p2)
+c1.setDono(p1)
+p1.deck.deck.append(c1)
+
 c2 = Carta()
-c2.setDono(p1)
+c2.setDono(p2)
+p2.deck.deck.append(c2)
+
 c3 = Carta()
 c3.setDono(p1)
+p1.deck.deck.append(c3)
+
+c4 = Carta()
+c4.setDono(p2)
+p2.deck.deck.append(c4)
+
+
+c5 = Carta()
+c5.setDono(p1)
+p1.deck.deck.append(c5)
+
+
+c6 = Carta()
+c6.setDono(p2)
+p2.deck.deck.append(c6)
+
+
+c7 = Carta()
+c7.setDono(p1)
+p1.deck.deck.append(c7)
+
+
+c8 = Carta()
+c8.setDono(p2)
+p2.deck.deck.append(c8)
+
+
+c9 = Carta()
+c9.setDono(p1)
+p1.deck.deck.append(c9)
+
+
+c10 = Carta()
+c10.setDono(p2)
+p2.deck.deck.append(c10)
+
 t = Tabuleiro()
-t.colocarCarta(0, 0, c1)
-t.colocarCarta(0, 1, c2)
-t.colocarCarta(0, 2, c3)
-t.colocarCarta(1, 0, c1)
-t.colocarCarta(1, 1, c2)
-t.colocarCarta(1, 2, c3)
-t.colocarCarta(2, 0, c1)
-t.colocarCarta(2, 1, c2)
-t.colocarCarta(2, 2, c3)
+t.colocarCarta(0, 0, p1.deck.deck[0])
+t.colocarCarta(0, 1, p2.deck.deck[0])
+t.colocarCarta(0, 2, p1.deck.deck[1])
+t.colocarCarta(1, 0, p2.deck.deck[1])
+t.colocarCarta(1, 1, p1.deck.deck[2])
+t.colocarCarta(1, 2, p2.deck.deck[2])
+t.colocarCarta(2, 0, p1.deck.deck[3])
+t.colocarCarta(2, 1, p2.deck.deck[3])
+t.colocarCarta(2, 2, p1.deck.deck[4])
 t.imprimir_tabuleiro()
