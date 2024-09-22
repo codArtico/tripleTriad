@@ -3,6 +3,7 @@ from deck import Deck
 from carta import Carta
 from jogador import Jogador
 from random import randint
+from colorama import Fore, Back, Style, init
 '''
 class Jogo:
 
@@ -22,8 +23,7 @@ class Jogo:
         return d  
 
     tab = Tabuleiro()
-    p1 = Jogador()
-    p2 = Jogador()
+    
     deckEscolha = criarDeckEscolha()
 
     def escolherCarta(deckEscolha,p):
@@ -57,10 +57,14 @@ class Jogo:
     else:
         print("Empate")
 '''
-
+p1 = Jogador(Back.BLUE)
+p2 = Jogador(Back.RED)
 c1 = Carta()
+c1.setDono(p2)
 c2 = Carta()
+c2.setDono(p1)
 c3 = Carta()
+c3.setDono(p1)
 t = Tabuleiro()
 t.colocarCarta(0, 0, c1)
 t.colocarCarta(0, 1, c2)
