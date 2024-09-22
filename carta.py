@@ -21,11 +21,11 @@ class Carta:
         """Retorna uma string formatada com o estilo de caixa com margens específicas."""
         cima = f"{self.valores['cima']:^8}"  # 4 espaços de margem em cada lado
         baixo = f"{self.valores['baixo']:^8}"  # 4 espaços de margem em cada lado
-        esquerda = f"{self.valores['esquerda']}   {self.valores['direita']}"  # 1 espaço de margem antes e depois, 3 espaços entre
+        esquerda = f"{self.valores['esquerda']}   {self.valores['direita']} "  # 1 espaço de margem antes e depois, 3 espaços entre
         return (
             "__________\n"
             f"|{cima}|\n"
-            f"| {esquerda} | \n"
+            f"| {esquerda} |\n"
             f"|{baixo}|\n"
             "__________"
         )
