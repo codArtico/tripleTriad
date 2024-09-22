@@ -12,7 +12,7 @@ class Tabuleiro:
             print("Jogada inválida, insira uma posição dísponível!")
             return False
 
-    def tabuleiroCheio(self): #Não é necessário passar parâmetro (Self == This)
+    def tabuleiroCheio(self): 
         if (self.cartasColocadas == 9):
             return True
         return False
@@ -66,10 +66,3 @@ class Tabuleiro:
                     cartaAdj1.dono = carta.dono
                     cartaAdj2.dono = carta.dono
 
-    def isFull(self):
-        for i in range(3):
-            for j in range(3):
-                if self.slots[i][j] == None:
-                    return False
-        
-        return True
