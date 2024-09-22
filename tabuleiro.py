@@ -1,16 +1,26 @@
+from colorama import Fore, Back, Style, init
+
 class Tabuleiro:
     def __init__(self):
         self.slots = [None,None,None],[None,None,None],[None,None,None]
         self.cartasColocadas = 0
 
     def colocarCarta(self,linha,coluna,carta):
-        if self.slots[linha][coluna] == None:
-            self.slots[linha][coluna] = carta
-            self.cartasColocadas +=1
-            return True
-        else:
+
+        if coluna<0 or coluna>2:
             print("Jogada inválida, insira uma posição dísponível!")
             return False
+        elif linha<0 or linha >2:
+            print("Jogada inválida, insira uma posição dísponível!")
+            return False
+        else:
+            if self.slots[linha][coluna] == None:
+                self.slots[linha][coluna] = carta
+                self.cartasColocadas +=1
+                return True
+            else:
+                print("Jogada inválida, insira uma posição dísponível!")
+                return False
 
     def tabuleiroCheio(self): 
         if (self.cartasColocadas == 9):
@@ -78,11 +88,11 @@ class Tabuleiro:
             carta = self.slots[linha][j]
             if carta is None:
                 carta_formatada = (
-                    "__________\n"
-                    "|        |\n"
-                    "|        |\n"
-                    "|        |\n"
-                    "__________"
+                    f"{Style.RESET_ALL}__________{Style.RESET_ALL}\n"
+                    f"{Style.RESET_ALL}|        |{Style.RESET_ALL}\n"
+                    f"{Style.RESET_ALL}|        |{Style.RESET_ALL}\n"
+                    f"{Style.RESET_ALL}|        |{Style.RESET_ALL}\n"
+                    f"{Style.RESET_ALL}__________{Style.RESET_ALL}"
                 )
             else:
                 carta_formatada = carta.formatar()
@@ -100,7 +110,7 @@ class Tabuleiro:
             print(linha)
         
         #imprime linha no final
-        print("__________ __________ __________")
+        print(f"{Style.RESET_ALL}__________ __________ __________{Style.RESET_ALL}")
         
         
     def imprimir_tabuleiro(self):
