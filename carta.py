@@ -11,9 +11,9 @@ class Carta:
         }
 
     def gerarValor():
-        v = randint(1,11)
+        v = randint(1,10)
 
-        if (v == 11):
+        if (v == 10):
             return "A"
         return v
     

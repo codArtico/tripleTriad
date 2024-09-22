@@ -99,6 +99,7 @@ class Tabuleiro:
         for linha in linhas:
             print(linha)
         
+        #imprime linha no final
         print("__________ __________ __________")
         
         
