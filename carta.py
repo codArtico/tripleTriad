@@ -4,13 +4,23 @@ from colorama import Fore, Back, Style, init
 # Inicializa o Colorama
 init(autoreset=True)
 
+
+def gerarValor():
+    v = randint(1,10)
+
+    if v == 10:
+        return "A"
+    return v
+
+
 class Carta:
     def __init__(self):
+        self.cor = None
         self.valores = {
-            'cima': Carta.gerarValor(),
-            'direita': Carta.gerarValor(),
-            'baixo': Carta.gerarValor(),
-            'esquerda': Carta.gerarValor()
+            'cima': gerarValor(),
+            'direita': gerarValor(),
+            'baixo': gerarValor(),
+            'esquerda': gerarValor()
             
         }
         self.dono = None
@@ -19,16 +29,9 @@ class Carta:
     def setDono(self,p):
         self.dono = p
 
-    def colocarCor(self,p1):
+    def colocarCor(self):
           self.cor =  Back.RED
 
-    def gerarValor():
-        v = randint(1,10)
-
-        if (v == 10):
-            return "A"
-        return v
-    
     def formatar(self):
         """Retorna uma string formatada com o estilo de caixa com margens específicas."""
         cima = f"{self.valores['cima']:^8}"  # 4 espaços de margem em cada lado

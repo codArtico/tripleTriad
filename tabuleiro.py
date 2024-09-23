@@ -1,5 +1,14 @@
 from colorama import Fore, Back, Style, init
 
+
+def atualizarPontuacao(jogador, valor):
+    jogador.pontuacao += valor
+    if valor > 0:
+        print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
+    else:
+        print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
+
+
 class Tabuleiro:
     def __init__(self,jogador1,jogador2):
         self.slots = [[None, None, None], [None, None, None], [None, None, None]]
@@ -10,22 +19,22 @@ class Tabuleiro:
     def colocarCarta(self,linha,coluna,carta):
 
         if coluna<0 or coluna>2:
-            print("Jogada inválida, insira uma posição dísponível!")
+            print("Jogada inválida, insira uma posição disponível!")
             return False
         elif linha<0 or linha >2:
-            print("Jogada inválida, insira uma posição dísponível!")
+            print("Jogada inválida, insira uma posição disponível!")
             return False
         else:
-            if self.slots[linha][coluna] == None:
+            if self.slots[linha][coluna] is None:
                 self.slots[linha][coluna] = carta
                 self.cartasColocadas +=1
                 return True
             else:
-                print("Jogada inválida, insira uma posição dísponível!")
+                print("Jogada inválida, insira uma posição disponível!")
                 return False
 
     def tabuleiroCheio(self): 
-        if (self.cartasColocadas == 9):
+        if self.cartasColocadas == 9:
             return True
         return False
     
@@ -63,8 +72,8 @@ class Tabuleiro:
 
                 if valorAtual > valorAdjacente:
                     cartaAdjacente.dono = carta.dono
-                    self.atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
-                    self.atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
+                    atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
+                    atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
                     print(f'Carta na posição {ax},{ay} capturada por {carta.dono.nome} pela regra padrão!')
                 
                 soma = valorAtual + valorAdjacente
@@ -85,26 +94,14 @@ class Tabuleiro:
                     cartaAdj = cartasAdj[direcao]
                     if cartaAdj.dono != carta.dono:
                         cartaAdj.dono = carta.dono
-                        self.atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
-                        self.atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
+                        atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
+                        atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
                         print(f'Carta na posição adjacente capturada por {carta.dono.nome} pela regra PLUS!')
 
 
 
     def getAdversario(self, jogador):
         return self.jogador1 if jogador == self.jogador2 else self.jogador2
-
-
-    def atualizarPontuacao(self, jogador, valor):
-        jogador.pontuacao += valor
-        if valor > 0:
-            print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
-        else:
-            print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
-
-    def getAdversario(self, jogador):
-        return self.jogador1 if jogador == self.jogador2 else self.jogador2
-
 
 
     def imprimir_linha(self, linha):

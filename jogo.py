@@ -1,9 +1,7 @@
-from tabuleiro import Tabuleiro
-from deck import Deck
+from colorama import Fore, Back, Style, init
 from carta import Carta
 from jogador import Jogador
-from random import randint
-from colorama import Fore, Back, Style, init
+from tabuleiro import Tabuleiro
 
 def fazerDeck(p):
     deck = []
@@ -27,19 +25,18 @@ p2Index = 0
 
 t = Tabuleiro(p1,p2)
 
-
 #Lógica do jogo
-while(not(t.tabuleiroCheio())):
+while not(t.tabuleiroCheio()):
     t.imprimir_tabuleiro()
     linha = (input("Escolha a linha: "))
     coluna = (input("Escolha a coluna: "))
     if player == 1:
-        if(t.colocarCarta(int(linha),int(coluna),p1.deck.deck[p1Index])):
+        if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[p1Index]):
             t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[p1Index])
             p1Index +=1
             player = 2
     else:
-        if(t.colocarCarta(int(linha),int(coluna),p2.deck.deck[p2Index])):
+        if t.colocarCarta(int(linha), int(coluna), p2.deck.deck[p2Index]):
             t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[p2Index])
             p2Index +=1
             player = 1
@@ -48,7 +45,7 @@ while(not(t.tabuleiroCheio())):
 
 t.imprimir_tabuleiro()
 
-if (p1.pontuacao>p2.pontuacao):
+if p1.pontuacao>p2.pontuacao:
     print("P1 ganhou")
 else:
     print("P2 ganhou")
