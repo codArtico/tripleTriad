@@ -1,9 +1,11 @@
 from colorama import Fore, Back, Style, init
 
 class Tabuleiro:
-    def __init__(self):
-        self.slots = [None,None,None],[None,None,None],[None,None,None]
+    def __init__(self,jogador1,jogador2):
+        self.slots = [[None, None, None], [None, None, None], [None, None, None]]
         self.cartasColocadas = 0
+        self.jogador1 = jogador1
+        self.jogador2 = jogador2
 
     def colocarCarta(self,linha,coluna,carta):
 
@@ -27,7 +29,7 @@ class Tabuleiro:
             return True
         return False
     
-    def verificarVizinhas (self,linha,coluna,carta):
+    def verificarVizinhas(self, linha, coluna, carta):
         direcoes = {
             'cima': (-1, 0),
             'baixo': (1, 0),
@@ -36,45 +38,72 @@ class Tabuleiro:
         }
 
         somas = []
-
-        cartasAdj = {
-
+        cartasAdj = {}
+        oposto = {
+            'cima': 'baixo',
+            'baixo': 'cima',
+            'esquerda': 'direita',
+            'direita': 'esquerda'
         }
 
-        oposto = {
-            'cima':'baixo', 
-            'baixo':'cima', 
-            'esquerda':'direita', 
-            'direita':'esquerda'
-            }
-            
-            
-        
-        for direcao, (dx,dy) in direcoes.items():
-            ax,ay = linha+dx,coluna+dy
+        cartasCapturadas = 0  # Contador de cartas capturadas pelo jogador
+
+        for direcao, (dx, dy) in direcoes.items():
+            ax, ay = linha + dx, coluna + dy
             
             if 0 <= ax < 3 and 0 <= ay < 3 and self.slots[ax][ay]:
                 cartaAdjacente = self.slots[ax][ay]
                 
                 valorAtual = carta.valores[direcao]
                 valorAdjacente = cartaAdjacente.valores[oposto[direcao]]
-
-                if valorAtual>valorAdjacente:
-                    cartaAdjacente.dono = carta.dono
-                    print(f'Carta na posição {ax},{ay} capturada por {carta.dono} pela regra padrão!')
                 
-                soma = valorAtual+valorAdjacente
-                somas.append = ((direcao,soma))
+                if valorAtual == 'A':
+                    valorAtual = 10
+                if valorAdjacente == 'A':
+                    valorAdjacente = 10
+
+                if valorAtual > valorAdjacente:
+                    cartaAdjacente.dono = carta.dono
+                    cartasCapturadas += 1  # Conta a carta capturada
+                    print(f'Carta na posição {ax},{ay} capturada por {carta.dono.nome} pela regra padrão!')
+                
+                soma = valorAtual + valorAdjacente
+                somas.append((direcao, soma))
                 cartasAdj[direcao] = cartaAdjacente
         
-        for i in range (len(somas)):
-            for j in range(i+1,len(somas)):
-                if somas[i][1] == somas [j][1]:
+        # Atualiza a pontuação para todas as cartas capturadas
+        if cartasCapturadas > 0:
+            self.atualizarPontuacao(carta.dono, cartasCapturadas)
+            self.atualizarPontuacao(self.getAdversario(carta.dono), -cartasCapturadas)
+        
+        # Verifica se duas cartas adjacentes têm a mesma soma
+        for i in range(len(somas)):
+            for j in range(i + 1, len(somas)):
+                if somas[i][1] == somas[j][1]:
                     direcao1, direcao2 = somas[i][0], somas[j][0]
                     cartaAdj1 = cartasAdj[direcao1]
                     cartaAdj2 = cartasAdj[direcao2]
                     cartaAdj1.dono = carta.dono
                     cartaAdj2.dono = carta.dono
+                    cartasCapturadas += 2
+                    print("cartaAdj1 e cartaAdj2 capturadas pelo PLUS")
+
+
+    def getAdversario(self, jogador):
+        return self.jogador1 if jogador == self.jogador2 else self.jogador2
+
+
+    def atualizarPontuacao(self, jogador, valor):
+        jogador.pontuacao += valor
+        if valor > 0:
+            print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
+        else:
+            print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
+
+    def getAdversario(self, jogador):
+        return self.jogador1 if jogador == self.jogador2 else self.jogador2
+
+
 
     def imprimir_linha(self, linha):
         """Imprime uma linha do tabuleiro formatada com alinhamento garantido e cores das cartas."""

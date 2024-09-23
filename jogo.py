@@ -13,17 +13,19 @@ def fazerDeck(p):
         deck.append(c)
     return deck
 
-
-p1 = Jogador(Back.BLUE)
+nome = (input("Insira um nome: "))
+p1 = Jogador(Back.BLUE,nome)
 p1.deck.deck = fazerDeck(p1)
-p2 = Jogador(Back.RED)
+
+nome = (input("Insira um nome: "))
+p2 = Jogador(Back.RED,nome)
 p2.deck.deck = fazerDeck(p2)
 
 player = 1
 p1Index = 0
 p2Index = 0
 
-t = Tabuleiro()
+t = Tabuleiro(p1,p2)
 
 
 #Lógica do jogo
@@ -33,11 +35,20 @@ while(not(t.tabuleiroCheio())):
     coluna = (input("Escolha a coluna: "))
     if player == 1:
         if(t.colocarCarta(int(linha),int(coluna),p1.deck.deck[p1Index])):
+            t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[p1Index])
             p1Index +=1
             player = 2
     else:
         if(t.colocarCarta(int(linha),int(coluna),p2.deck.deck[p2Index])):
+            t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[p2Index])
             p2Index +=1
             player = 1
+    print(f"{p1.nome}: {p1.pontuacao}")
+    print(f"{p2.nome}: {p2.pontuacao}")
 
 t.imprimir_tabuleiro()
+
+if (p1.pontuacao>p2.pontuacao):
+    print("P1 ganhou")
+else:
+    print("P2 ganhou")
