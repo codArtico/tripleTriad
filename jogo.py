@@ -46,6 +46,8 @@ while not(t.tabuleiroCheio()):
 t.imprimir_tabuleiro()
 
 if p1.pontuacao>p2.pontuacao:
-    print("P1 ganhou")
+    print(f"{p1.nome} ganhou!")
+elif p2.pontuacao>p1.pontuacao:
+    print(f"{p2.nome} ganhou!")
 else:
-    print("P2 ganhou")
+    print("Empate")
