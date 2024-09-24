@@ -9,6 +9,7 @@ def fazerDeck(p):
         c = Carta()
         c.setDono(p)
         deck.append(c)
+
     return deck
 
 nome = (input("Insira um nome: "))
@@ -18,6 +19,13 @@ p1.deck.deck = fazerDeck(p1)
 nome = (input("Insira um nome: "))
 p2 = Jogador(Back.RED,nome)
 p2.deck.deck = fazerDeck(p2)
+
+c1 = p1.doarCartaSwap()
+c2 = p2.doarCartaSwap()
+
+p1.receberCartaSwap(c2)
+p2.receberCartaSwap(c1)
+
 
 player = 1
 p1Index = 0
