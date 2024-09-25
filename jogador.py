@@ -8,15 +8,16 @@ class Jogador:
         self.inicial = False
         self.cor = cor
 
+    # Sistema de funções do SWAP
     def doarCartaSwap(self,p):
         index = (int(input(f"{self.nome}, informe o indice da carta a ser trocada: ")))
         carta = self.deck.deck.pop(index-1)
         carta.setDono(p)
         return carta
-    
     def receberCartaSwap(self, carta):
         self.deck.deck.append(carta)
 
+    # Mostra as cartas do Player
     def mostrarMao(self):
         print(f"\n{self.nome}', suas cartas:'")
 
@@ -38,9 +39,8 @@ class Jogador:
         print(final)
         print("\n")
 
-    def mostrarDeckDividido(self):
     # Código pra mostrar cartas da mesa, para escolha. Não confundir com MostrarMao()
-
+    def mostrarDeckDividido(self):
         print(f"\n{self.nome}, suas cartas disponíveis:")
         
         num_cartas = len(self.deck.deck)
@@ -70,7 +70,7 @@ class Jogador:
         # Aqui imprime de 1 a 5
         final = ""
         indices_linha1 = 1
-        
+
         for linha in cartas_linha1:
             print(linha)
             final += f"     {indices_linha1}     "

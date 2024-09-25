@@ -1,8 +1,10 @@
+# Importações (Cor e POO)
 from colorama import Fore, Back, Style, init
 from carta import Carta
 from jogador import Jogador
 from tabuleiro import Tabuleiro
 
+#Método que gera as cartas aleatoriamente pra os players escolherem
 def fazerDeck(p):
     deck = []
     for i in range (10):
@@ -12,6 +14,7 @@ def fazerDeck(p):
 
     return deck
 
+# Método pra selecionar a carta (Faz parte do selecionarCarta())
 def select(p,mesa):
     index = (int(input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck.deck)}: ")))
     while(index<1 or index>len(mesa.deck.deck)):
@@ -20,7 +23,7 @@ def select(p,mesa):
     carta.setDono(p)
     p.deck.deck.append(carta)
 
-
+# Método para seleção de decks
 def selecionarCarta(p1,p2,mesa):
     for i in range (10):
         mesa.mostrarDeckDividido()
@@ -29,19 +32,34 @@ def selecionarCarta(p1,p2,mesa):
         else:
             select(p2,mesa)
 
+# Método para Realizar Jogada
+def realizarJogada(p):
+    p.mostrarMao()
+    index = (int(input("Escolha uma carta de 1 a 5: ")))
+    linha = (input("Escolha a linha: "))
+    coluna = (input("Escolha a coluna: "))
+    
+    index -= 1
+    if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[index]):
+        t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[index])
+        p.deck.deck.pop(index)
+
+# Configuração da mesa
 mesa = Jogador(Back.GREEN,"Mesa")
 mesa.deck.deck = fazerDeck(mesa)
 
+# Configuração dos players
 nome = (input("Insira um nome: "))
 p1 = Jogador(Back.BLUE,nome)
-
 nome = (input("Insira um nome: "))
 p2 = Jogador(Back.RED,nome)
 
+# Criando decks
 selecionarCarta(p1,p2,mesa)
 
+# Hora do SWAP
 p1.mostrarMao()
-c1 = p1.doarCartaSwap(p2)  
+c1 = p1.doarCartaSwap(p2)
 
 p2.mostrarMao()
 c2 = p2.doarCartaSwap(p1)
@@ -49,10 +67,10 @@ c2 = p2.doarCartaSwap(p1)
 p2.receberCartaSwap(c1)   
 p1.receberCartaSwap(c2) 
 
-
+# Configurações gerais (Marcador do player da vez)
 player = 1
-index = 0
 
+# Criação do Tabuleiro
 t = Tabuleiro(p1,p2)
 
 #Lógica do jogo
@@ -60,33 +78,21 @@ while not(t.tabuleiroCheio()):
     t.imprimir_tabuleiro()
     
     if player == 1:
-        
-        p1.mostrarMao()
-        index = (int(input("Escolha uma carta de 1 a 5: ")))
-        linha = (input("Escolha a linha: "))
-        coluna = (input("Escolha a coluna: "))
-        
-        index -= 1
-        if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[index]):
-            t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[index])
-            p1.deck.deck.pop(index)
-            player = 2
+        realizarJogada(p1)
+        player = 2
     else:
-        p2.mostrarMao()
-        index = (int(input("Escolha uma carta de 1 a 5: ")))
-        linha = (input("Escolha a linha: "))
-        coluna = (input("Escolha a coluna: "))
-        
-        index -= 1
-        if t.colocarCarta(int(linha), int(coluna), p2.deck.deck[index]):
-            t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[index])
-            p2.deck.deck.pop(index)
-            player = 1
+        realizarJogada(p2)
+        player = 1
+
+    # Exibe pontuação dos dois jogadores a cada rodada
     print(f"{p1.nome}: {p1.pontuacao}")
     print(f"{p2.nome}: {p2.pontuacao}")
 
+# Tabuleiro final
 t.imprimir_tabuleiro()
 
+
+#Condições de vitória
 if p1.pontuacao>p2.pontuacao:
     print(f"{p1.nome} ganhou!")
 elif p2.pontuacao>p1.pontuacao:
