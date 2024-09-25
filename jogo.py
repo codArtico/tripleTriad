@@ -5,20 +5,40 @@ from tabuleiro import Tabuleiro
 
 def fazerDeck(p):
     deck = []
-    for i in range (5):
+    for i in range (10):
         c = Carta()
         c.setDono(p)
         deck.append(c)
 
     return deck
 
+def select(p,mesa):
+    index = (int(input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck.deck)}: ")))
+    while(index<1 or index>len(mesa.deck.deck)):
+        index = (int(input(f"Escolha inválida! Escolha 1 carta de 1 a {len(mesa.deck.deck)}: " )))
+    carta = mesa.deck.deck.pop(index-1)
+    carta.setDono(p)
+    p.deck.deck.append(carta)
+
+
+def selecionarCarta(p1,p2,mesa):
+    for i in range (10):
+        mesa.mostrarDeckDividido()
+        if i%2 == 0:
+            select(p1,mesa)
+        else:
+            select(p2,mesa)
+
+mesa = Jogador(Back.GREEN,"Mesa")
+mesa.deck.deck = fazerDeck(mesa)
+
 nome = (input("Insira um nome: "))
 p1 = Jogador(Back.BLUE,nome)
-p1.deck.deck = fazerDeck(p1)
 
 nome = (input("Insira um nome: "))
 p2 = Jogador(Back.RED,nome)
-p2.deck.deck = fazerDeck(p2)
+
+selecionarCarta(p1,p2,mesa)
 
 p1.mostrarMao()
 c1 = p1.doarCartaSwap(p2)  
