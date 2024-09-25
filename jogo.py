@@ -40,8 +40,8 @@ def realizarJogada(p):
     coluna = (input("Escolha a coluna: "))
     
     index -= 1
-    if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[index]):
-        t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[index])
+    if t.colocarCarta(int(linha), int(coluna), p.deck.deck[index]):
+        t.verificarVizinhas(int(linha),int(coluna),p.deck.deck[index])
         p.deck.deck.pop(index)
 
 # Configuração da mesa

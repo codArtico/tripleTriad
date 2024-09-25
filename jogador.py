@@ -19,7 +19,7 @@ class Jogador:
 
     # Mostra as cartas do Player
     def mostrarMao(self):
-        print(f"\n{self.nome}', suas cartas:'")
+        print(f"\n{self.nome}, suas cartas:")
 
         cartas_linha = [""] * 5  #Basicamente, ele vai criar o espaço máximo pra guardar as cartas
 
