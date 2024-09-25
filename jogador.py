@@ -3,7 +3,7 @@ from deck import Deck
 class Jogador:
     def __init__ (self,cor,nome):
         self.nome = nome
-        self.deck = Deck()
+        self.deck = []
         self.pontuacao = 5
         self.inicial = False
         self.cor = cor
@@ -11,11 +11,11 @@ class Jogador:
     # Sistema de funções do SWAP
     def doarCartaSwap(self,p):
         index = (int(input(f"{self.nome}, informe o indice da carta a ser trocada: ")))
-        carta = self.deck.deck.pop(index-1)
+        carta = self.deck.pop(index-1)
         carta.setDono(p)
         return carta
     def receberCartaSwap(self, carta):
-        self.deck.deck.append(carta)
+        self.deck.append(carta)
 
     # Mostra as cartas do Player
     def mostrarMao(self):
@@ -23,7 +23,7 @@ class Jogador:
 
         cartas_linha = [""] * 5  #Basicamente, ele vai criar o espaço máximo pra guardar as cartas
 
-        for carta in self.deck.deck:
+        for carta in self.deck:
             carta_formatada = carta.formatar().split('\n') # Ele vai despedaçar a função carta.formatar
             for j in range(5):
                 cartas_linha[j] += carta_formatada[j] + " "  # Adiciona espaço entre as cartas
@@ -43,7 +43,7 @@ class Jogador:
     def mostrarDeckDividido(self):
         print(f"\n{self.nome}, suas cartas disponíveis:")
         
-        num_cartas = len(self.deck.deck)
+        num_cartas = len(self.deck)
         max_linhas = 5
 
         # Divide as cartas em duas linhas
@@ -54,7 +54,7 @@ class Jogador:
         cartas_linha2 = [""] * max_linhas
 
         for i in range(num_cartas_total):
-            carta = self.deck.deck[i]
+            carta = self.deck[i]
             carta_formatada = carta.formatar().split('\n')
             if i < num_cartas_por_linha:
                 linha_destino = cartas_linha1

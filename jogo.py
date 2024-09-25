@@ -16,12 +16,12 @@ def fazerDeck(p):
 
 # Método pra selecionar a carta (Faz parte do selecionarCarta())
 def select(p,mesa):
-    index = (int(input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck.deck)}: ")))
-    while(index<1 or index>len(mesa.deck.deck)):
-        index = (int(input(f"Escolha inválida! Escolha 1 carta de 1 a {len(mesa.deck.deck)}: " )))
-    carta = mesa.deck.deck.pop(index-1)
+    index = (int(input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck)}: ")))
+    while(index<1 or index>len(mesa.deck)):
+        index = (int(input(f"Escolha inválida! Escolha 1 carta de 1 a {len(mesa.deck)}: " )))
+    carta = mesa.deck.pop(index-1)
     carta.setDono(p)
-    p.deck.deck.append(carta)
+    p.deck.append(carta)
 
 # Método para seleção de decks
 def selecionarCarta(p1,p2,mesa):
@@ -40,13 +40,13 @@ def realizarJogada(p):
     coluna = (input("Escolha a coluna: "))
     
     index -= 1
-    if t.colocarCarta(int(linha), int(coluna), p.deck.deck[index]):
-        t.verificarVizinhas(int(linha),int(coluna),p.deck.deck[index])
-        p.deck.deck.pop(index)
+    if t.colocarCarta(int(linha), int(coluna), p.deck[index]):
+        t.verificarVizinhas(int(linha),int(coluna),p.deck[index])
+        p.deck.pop(index)
 
 # Configuração da mesa
 mesa = Jogador(Back.GREEN,"Mesa")
-mesa.deck.deck = fazerDeck(mesa)
+mesa.deck = fazerDeck(mesa)
 
 # Configuração dos players
 nome = (input("Insira um nome: "))
