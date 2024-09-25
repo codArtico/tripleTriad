@@ -20,33 +20,41 @@ nome = (input("Insira um nome: "))
 p2 = Jogador(Back.RED,nome)
 p2.deck.deck = fazerDeck(p2)
 
-c1 = p1.doarCartaSwap()
-c2 = p2.doarCartaSwap()
+c1 = p1.doarCartaSwap(p2)
+c2 = p2.doarCartaSwap(p1)
 
 p1.receberCartaSwap(c2)
 p2.receberCartaSwap(c1)
 
 
 player = 1
-p1Index = 0
-p2Index = 0
+index = 0
 
 t = Tabuleiro(p1,p2)
 
 #Lógica do jogo
 while not(t.tabuleiroCheio()):
     t.imprimir_tabuleiro()
-    linha = (input("Escolha a linha: "))
-    coluna = (input("Escolha a coluna: "))
+    
     if player == 1:
-        if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[p1Index]):
-            t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[p1Index])
-            p1Index +=1
+        p1.mostrarMao()
+        linha = (input("Escolha a linha: "))
+        coluna = (input("Escolha a coluna: "))
+        index = (int(input("Escolha uma carta de 1 a 5: ")))
+        index -= 1
+        if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[index]):
+            t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[index])
+            p1.deck.deck.pop(index)
             player = 2
     else:
-        if t.colocarCarta(int(linha), int(coluna), p2.deck.deck[p2Index]):
-            t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[p2Index])
-            p2Index +=1
+        p2.mostrarMao()
+        linha = (input("Escolha a linha: "))
+        coluna = (input("Escolha a coluna: "))
+        index = (int(input("Escolha uma carta de 1 a 5: ")))
+        index -= 1
+        if t.colocarCarta(int(linha), int(coluna), p2.deck.deck[index]):
+            t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[index])
+            p2.deck.deck.pop(index)
             player = 1
     print(f"{p1.nome}: {p1.pontuacao}")
     print(f"{p2.nome}: {p2.pontuacao}")

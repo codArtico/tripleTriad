@@ -52,5 +52,5 @@ class Carta:
             f"{self.dono.cor}|{cima}|\n"
             f"{self.dono.cor}|{esquerda}|\n"
             f"{self.dono.cor}|{baixo}|\n"
-            "__________{Style.RESET_ALL}"
-        )
+            "__________"
+    )
