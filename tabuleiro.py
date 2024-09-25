@@ -1,6 +1,5 @@
 from colorama import Fore, Back, Style, init
 
-
 def atualizarPontuacao(jogador, valor):
     jogador.pontuacao += valor
     if valor > 0:

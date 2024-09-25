@@ -35,7 +35,9 @@ def selecionarCarta(p1,p2,mesa):
 # Método para Realizar Jogada
 def realizarJogada(p):
     p.mostrarMao()
-    index = (int(input("Escolha uma carta de 1 a 5: ")))
+    index = (int(input(f"Escolha uma carta de 1 a {len(p.deck)}: ")))
+    while(index < 1 or index >len(p.deck)):
+        index = (int(input(f"Escolha inválida! Escolha uma carta de 1 a {len(p.deck)}: ")))
     linha = (input("Escolha a linha: "))
     coluna = (input("Escolha a coluna: "))
     

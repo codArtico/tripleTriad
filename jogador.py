@@ -1,5 +1,3 @@
-from deck import Deck
-
 class Jogador:
     def __init__ (self,cor,nome):
         self.nome = nome
