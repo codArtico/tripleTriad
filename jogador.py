@@ -10,7 +10,7 @@ class Jogador:
 
     def doarCartaSwap(self,p):
         index = (int(input(f"{self.nome}, informe o indice da carta a ser trocada: ")))
-        carta = self.deck.deck.pop(index)
+        carta = self.deck.deck.pop(index-1)
         carta.setDono(p)
         return carta
     
@@ -28,7 +28,12 @@ class Jogador:
                 cartas_linha[j] += carta_formatada[j] + " "  # Adiciona espaço entre as cartas
             
         # vai imprimir todas as linhas (for each)
+        contLinha = 1
+        final = ""
         for linha in cartas_linha:
             print(linha)
-
+            final += f"     {contLinha}     "
+            contLinha +=1
+            
+        print(final)
         print("\n")

@@ -20,11 +20,14 @@ nome = (input("Insira um nome: "))
 p2 = Jogador(Back.RED,nome)
 p2.deck.deck = fazerDeck(p2)
 
-c1 = p1.doarCartaSwap(p2)
+p1.mostrarMao()
+c1 = p1.doarCartaSwap(p2)  
+
+p2.mostrarMao()
 c2 = p2.doarCartaSwap(p1)
 
-p1.receberCartaSwap(c2)
-p2.receberCartaSwap(c1)
+p2.receberCartaSwap(c1)   
+p1.receberCartaSwap(c2) 
 
 
 player = 1
@@ -37,10 +40,12 @@ while not(t.tabuleiroCheio()):
     t.imprimir_tabuleiro()
     
     if player == 1:
+        
         p1.mostrarMao()
+        index = (int(input("Escolha uma carta de 1 a 5: ")))
         linha = (input("Escolha a linha: "))
         coluna = (input("Escolha a coluna: "))
-        index = (int(input("Escolha uma carta de 1 a 5: ")))
+        
         index -= 1
         if t.colocarCarta(int(linha), int(coluna), p1.deck.deck[index]):
             t.verificarVizinhas(int(linha),int(coluna),p1.deck.deck[index])
@@ -48,9 +53,10 @@ while not(t.tabuleiroCheio()):
             player = 2
     else:
         p2.mostrarMao()
+        index = (int(input("Escolha uma carta de 1 a 5: ")))
         linha = (input("Escolha a linha: "))
         coluna = (input("Escolha a coluna: "))
-        index = (int(input("Escolha uma carta de 1 a 5: ")))
+        
         index -= 1
         if t.colocarCarta(int(linha), int(coluna), p2.deck.deck[index]):
             t.verificarVizinhas(int(linha),int(coluna),p2.deck.deck[index])
