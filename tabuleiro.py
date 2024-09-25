@@ -71,10 +71,11 @@ class Tabuleiro:
                     valorAdjacente = 10
 
                 if valorAtual > valorAdjacente:
-                    cartaAdjacente.dono = carta.dono
-                    atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
-                    atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
-                    print(f'Carta na posição {ax},{ay} capturada por {carta.dono.nome} pela regra padrão!')
+                    if cartaAdjacente.dono != carta.dono:
+                        cartaAdjacente.dono = carta.dono
+                        atualizarPontuacao(carta.dono, 1)  # Atualiza a pontuação do jogador que capturou a carta
+                        atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
+                        print(f'Carta na posição {ax},{ay} capturada por {carta.dono.nome} pela regra padrão!')
                 
                 soma = valorAtual + valorAdjacente
                 somas.append((direcao, soma))
