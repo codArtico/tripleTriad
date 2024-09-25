@@ -80,9 +80,11 @@ while not(t.tabuleiroCheio()):
     t.imprimir_tabuleiro()
     
     if player == 1:
+        input(f"{p1.nome}, pressione ENTER para continuar!")
         realizarJogada(p1)
         player = 2
     else:
+        input(f"{p2.nome}, pressione ENTER para continuar!")
         realizarJogada(p2)
         player = 1
 
