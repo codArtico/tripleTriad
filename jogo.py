@@ -164,12 +164,14 @@ def rodarJogo():
     placarFinal(p1,p2)
 
     key = (input("Deseja jogar novamente? (S/N): "))
-    if key.upper == 'S':
+    key = key.upper
+    if key == "S" or key == "s":
         return True
     return False
 
 key = (input("Deseja iniciar o jogo? (S/N): "))
-if key.upper == 'S':
+
+if key == "S" or key == "s":
     key = True
     while(key):
         key = rodarJogo()
