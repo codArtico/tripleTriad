@@ -63,8 +63,6 @@ class Jogador:
                 if j < len(carta_formatada):
                     linha_destino[j] += carta_formatada[j] + " "  # Adiciona espaço entre cartas
 
-        
-
         # Aqui imprime de 1 a 5
         final = ""
         indices_linha1 = 1
