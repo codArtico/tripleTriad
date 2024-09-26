@@ -1,8 +1,9 @@
 from random import randint
-from colorama import Fore, Back, Style, init
+from colorama import Back, init
 
 # Inicializa o Colorama
 init(autoreset=True)
+
 
 def gerarValor():
     while True:
@@ -19,26 +20,26 @@ def gerarValor():
             continue
 
         if 14 <= sum(v for v in valores) <= 30:
-            return ['A' if v == 10 else v for v in valores]
+            return ["A" if v == 10 else v for v in valores]
+
 
 class Carta:
     def __init__(self):
         self.cor = None
         valores = gerarValor()
         self.valores = {
-            'cima': valores[0],
-            'direita': valores[1],
-            'baixo': valores[2],
-            'esquerda': valores[3]
+            "cima": valores[0],
+            "direita": valores[1],
+            "baixo": valores[2],
+            "esquerda": valores[3],
         }
         self.dono = None
 
-
-    def setDono(self,p):
+    def setDono(self, p):
         self.dono = p
 
     def colocarCor(self):
-          self.cor =  Back.RED
+        self.cor = Back.RED
 
     def formatar(self):
         """Retorna uma string formatada com o estilo de caixa com margens específicas."""
@@ -51,4 +52,4 @@ class Carta:
             f"{self.dono.cor}|{esquerda}|\n"
             f"{self.dono.cor}|{baixo}|\n"
             "__________"
-    )
+        )
