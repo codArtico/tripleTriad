@@ -57,7 +57,7 @@ def selecionarCarta(p1,p2,mesa):
         limpa()
 
 # Método para Realizar Jogada
-def realizarJogada(p):
+def realizarJogada(p,t):
     p.mostrarMao()
     index = (int(input(f"Escolha uma carta de 1 a {len(p.deck)}: ")))
     while(index < 1 or index >len(p.deck)):
@@ -69,78 +69,104 @@ def realizarJogada(p):
     if t.colocarCarta(int(linha), int(coluna), p.deck[index]):
         t.verificarVizinhas(int(linha),int(coluna),p.deck[index])
         p.deck.pop(index)
+    return t
 
-# Configuração da mesa
-mesa = Jogador(Back.GREEN,"Mesa")
-mesa.deck = fazerDeck(mesa)
-
-# Configuração dos players
-nome = (input("Insira o nome do Player 1: "))
-p1 = Jogador(Back.BLUE,nome)
-nome = (input("Insira o nome do Player 2: "))
-p2 = Jogador(Back.RED,nome)
-limpa()
-
-# Criando decks
-selecionarCarta(p1,p2,mesa)
-limpa()
-
-# Hora do SWAP
-input(f"{p1.nome}, pressione ENTER para continuar!")
-limpa()
-p1.mostrarMao()
-c1 = p1.doarCartaSwap(p2)
-
-limpa()
-input(f"{p2.nome}, pressione ENTER para continuar!")
-p2.mostrarMao()
-c2 = p2.doarCartaSwap(p1)
-
-limpa()
-p2.receberCartaSwap(c1)   
-p1.receberCartaSwap(c2) 
-
-# Configurações gerais (Marcador do player da vez)
-player = 1
-
-# Criação do Tabuleiro
-t = Tabuleiro(p1,p2)
-
-#Lógica do jogo
-while not(t.tabuleiroCheio()):
-    t.imprimir_tabuleiro()
-    
-    if player == 1:
-        input(f"{p1.nome}, pressione ENTER para continuar!")
-        limpa()
-        t.imprimir_tabuleiro()
-        realizarJogada(p1)
-        player = 2
+def checarVitoria(p1,p2):
+    if p1.pontuacao>p2.pontuacao:
+        print(f"{p1.nome} ganhou!")
+    elif p2.pontuacao>p1.pontuacao:
+        print(f"{p2.nome} ganhou!")
     else:
-        input(f"{p2.nome}, pressione ENTER para continuar!")
-        limpa()
-        t.imprimir_tabuleiro()
-        realizarJogada(p2)
-        player = 1
+        print("Empate")
 
-    # Exibe pontuação dos dois jogadores a cada rodada
-    
+def placarFinal(p1,p2):
+    print("Fim de jogo! Placar final: ")
+    print("")
+    print(f"{p1.nome} {p1.pontuacao} x {p2.pontuacao} {p2.nome}")
+    print("")
+    checarVitoria(p1,p2)
+
+def exibirPlacar(p1,p2):
     print(f"{p1.nome}: {p1.pontuacao}")
     print(f"{p2.nome}: {p2.pontuacao}")
 
-# Tabuleiro final
-limpa()
-t.imprimir_tabuleiro()
+def rodada(p,t):
+    input(f"{p.nome}, pressione ENTER para continuar!")
+    limpa()
+    t.imprimir_tabuleiro()
+    realizarJogada(p,t)
 
-print("Fim de jogo! Placar final: ")
-print("")
-print(f"{p1.nome} {p1.pontuacao} x {p2.pontuacao} {p2.nome}")
-print("")
+# Configuração da mesa
+def criarMesa():
+    mesa = Jogador(Back.GREEN,"Mesa")
+    mesa.deck = fazerDeck(mesa)
+    return mesa
 
-#Condições de vitória
-if p1.pontuacao>p2.pontuacao:
-    print(f"{p1.nome} ganhou!")
-elif p2.pontuacao>p1.pontuacao:
-    print(f"{p2.nome} ganhou!")
-else:
-    print("Empate")
+def configPlayers():
+    nome = (input("Insira o nome do Player 1: "))
+    p1 = Jogador(Back.BLUE,nome)
+    nome = (input("Insira o nome do Player 2: "))
+    p2 = Jogador(Back.RED,nome)
+    limpa()
+    return p1,p2
+
+#Lógica do jogo
+def rodarJogo():
+    mesa = criarMesa()
+    p1,p2 = configPlayers()
+
+    # Criando decks
+    selecionarCarta(p1,p2,mesa)
+    limpa()
+
+    # Hora do SWAP
+    input(f"{p1.nome}, pressione ENTER para continuar!")
+    limpa()
+    p1.mostrarMao()
+    c1 = p1.doarCartaSwap(p2)
+
+    limpa()
+    input(f"{p2.nome}, pressione ENTER para continuar!")
+    p2.mostrarMao()
+    c2 = p2.doarCartaSwap(p1)
+
+    limpa()
+    p2.receberCartaSwap(c1)   
+    p1.receberCartaSwap(c2) 
+
+    # Criação do Tabuleiro
+    t = Tabuleiro(p1,p2)
+
+    # Configurações gerais (Marcador do player da vez)
+    player = 1
+
+    while not(t.tabuleiroCheio()):
+        t.imprimir_tabuleiro()
+        
+        if player == 1:
+            rodada(p1,t)
+            player = 2
+        else:
+            rodada(p2,t)
+            player = 1
+
+        # Exibe pontuação dos dois jogadores a cada rodada
+        
+        exibirPlacar(p1,p2)
+
+    # Tabuleiro final
+    limpa()
+    t.imprimir_tabuleiro()
+
+    placarFinal(p1,p2)
+
+    key = (input("Deseja jogar novamente? (S/N): "))
+    if key.upper == 'S':
+        return True
+    return False
+
+key = (input("Deseja iniciar o jogo? (S/N): "))
+if key.upper == 'S':
+    key = True
+    while(key):
+        key = rodarJogo()
