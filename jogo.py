@@ -25,7 +25,6 @@ def limpa():
         os.system('clear')
     logo()
 
-
 limpa()
 input("Pressione ENTER para jogar!")
 #Método que gera as cartas aleatoriamente pra os players escolherem
@@ -80,9 +79,8 @@ nome = (input("Insira o nome do Player 1: "))
 p1 = Jogador(Back.BLUE,nome)
 nome = (input("Insira o nome do Player 2: "))
 p2 = Jogador(Back.RED,nome)
-
-
 limpa()
+
 # Criando decks
 selecionarCarta(p1,p2,mesa)
 limpa()
@@ -97,7 +95,6 @@ limpa()
 input(f"{p2.nome}, pressione ENTER para continuar!")
 p2.mostrarMao()
 c2 = p2.doarCartaSwap(p1)
-
 
 limpa()
 p2.receberCartaSwap(c1)   

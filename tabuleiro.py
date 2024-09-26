@@ -7,7 +7,6 @@ def atualizarPontuacao(jogador, valor):
     else:
         print(f"{jogador.nome} agora tem {jogador.pontuacao} pontos.")
 
-
 class Tabuleiro:
     def __init__(self,jogador1,jogador2):
         self.slots = [[None, None, None], [None, None, None], [None, None, None]]
@@ -16,7 +15,6 @@ class Tabuleiro:
         self.jogador2 = jogador2
 
     def colocarCarta(self,linha,coluna,carta):
-
         if coluna<0 or coluna>2:
             print("Jogada inválida, insira uma posição disponível!")
             return False
@@ -98,11 +96,8 @@ class Tabuleiro:
                         atualizarPontuacao(self.getAdversario(carta.dono), -1)  # Atualiza a pontuação do adversário
                         print(f'Carta na posição adjacente capturada por {carta.dono.nome} pela regra PLUS!')
 
-
-
     def getAdversario(self, jogador):
         return self.jogador1 if jogador == self.jogador2 else self.jogador2
-
 
     def imprimir_linha(self, linha):
         """Imprime uma linha do tabuleiro formatada com alinhamento garantido e cores das cartas."""
@@ -139,7 +134,6 @@ class Tabuleiro:
         
         #imprime linha no final
         print(f"{Style.RESET_ALL}__________ __________ __________{Style.RESET_ALL}")
-        
         
     def imprimir_tabuleiro(self):
         self.imprimir_linha(0)
