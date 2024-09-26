@@ -4,7 +4,6 @@ from colorama import Fore, Back, Style, init
 # Inicializa o Colorama
 init(autoreset=True)
 
-
 def gerarValor():
     while True:
         valores = [randint(1, 10) for _ in range(4)]
@@ -21,7 +20,6 @@ def gerarValor():
 
         if 14 <= sum(v for v in valores) <= 30:
             return ['A' if v == 10 else v for v in valores]
-
 
 class Carta:
     def __init__(self):
