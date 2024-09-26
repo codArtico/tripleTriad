@@ -10,7 +10,7 @@ class Mesa:
         self.mesa = Jogador(colorama.Back.GREEN, "Mesa")
         self.deck = jogo.fazerDeck(self.mesa)
 
-    # Método pra selecionar a carta (Faz parte do selecionarCarta())
+    # seleciona a carta (Faz parte do selecionarCarta())
     @staticmethod
     def select(p, mesa):
         index = input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck)}: ")
@@ -22,7 +22,7 @@ class Mesa:
         carta.setDono(p)
         p.deck.append(carta)
 
-    # Método para seleção de decks
+    #seleção de decks
     @staticmethod
     def selecionarCarta(p1, p2, mesa):
         for i in range(10):
