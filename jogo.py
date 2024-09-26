@@ -1,4 +1,7 @@
-# Importações (Cor e POO)
+# Importações (Cor, POO e Sistema)
+import os
+import platform
+
 from colorama import Fore, Back, Style, init
 from carta import Carta
 from jogador import Jogador
@@ -11,9 +14,6 @@ def logo():
     print("  ██    ██   ██ ██  ██      ██      ██             ██    ██   ██ ██ ██   ██ ██   ██")
     print("  ██    ██   ██ ██  ██      ███████ ████████       ██    ██   ██ ██ ██   ██ ██████ ")
     print("")
-
-import os
-import platform
 
 def limpa():
     # Identifica o sistema operacional
