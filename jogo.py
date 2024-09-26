@@ -27,6 +27,8 @@ def limpa():
 
 limpa()
 input("Pressione ENTER para jogar!")
+limpa()
+
 #Método que gera as cartas aleatoriamente pra os players escolherem
 def fazerDeck(p):
     deck = []
@@ -112,6 +114,7 @@ def configPlayers():
 
 #Lógica do jogo
 def rodarJogo():
+    limpa()
     mesa = criarMesa()
     p1,p2 = configPlayers()
 
