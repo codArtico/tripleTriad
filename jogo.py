@@ -115,13 +115,15 @@ while not(t.tabuleiroCheio()):
     
     if player == 1:
         input(f"{p1.nome}, pressione ENTER para continuar!")
-        realizarJogada(p1)
         limpa()
+        t.imprimir_tabuleiro()
+        realizarJogada(p1)
         player = 2
     else:
         input(f"{p2.nome}, pressione ENTER para continuar!")
-        realizarJogada(p2)
         limpa()
+        t.imprimir_tabuleiro()
+        realizarJogada(p2)
         player = 1
 
     # Exibe pontuação dos dois jogadores a cada rodada
