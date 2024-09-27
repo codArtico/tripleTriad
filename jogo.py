@@ -13,28 +13,41 @@ def fazerDeck(p):
     return deck
 
 
+
 # Realiza Jogada
 def realizarJogada(p,t):
     p.mostrarMao()
 
     index = input(f"Escolha uma carta de 1 a {len(p.deck)}: ")
-    while not index.isnumeric():
+    while not index.isnumeric() or int(index) < 1 or int(index) > len(p.deck):
         index = input(f"Escolha inválida! Escolha uma carta de 1 a {len(p.deck)}: ")
     index = int(index) - 1
 
     linha = input("Escolha a linha: ")
-    while not linha.isnumeric():
+    while not linha.isnumeric() or int(linha) < 1 or int(linha) > 3:
         linha = input(f"Escolha inválida! Escolha uma carta de 1 a 3: ")
     linha = int(linha) - 1
     
     coluna = input("Escolha a coluna: ")
-    while not coluna.isnumeric():
+    while not coluna.isnumeric() or int(coluna) < 1 or int(coluna) > 3:
         coluna = input(f"Escolha inválida! Escolha uma carta de 1 a 3: ")
     coluna = int(coluna) - 1
 
-    if t.colocarCarta(int(linha), int(coluna), p.deck[index]):
-        t.verificarVizinhas(int(linha),int(coluna),p.deck[index])
-        p.deck.pop(index)
+    while not t.colocarCarta(int(linha), int(coluna), p.deck[index]):
+        
+        linha = input("Escolha a linha: ")
+        while not linha.isnumeric() or int(linha) < 1 or int(linha) > 3:
+            linha = input(f"Escolha inválida! Escolha uma carta de 1 a 3: ")
+        linha = int(linha) - 1
+    
+        coluna = input("Escolha a coluna: ")
+        while not coluna.isnumeric() or int(coluna) < 1 or int(coluna) > 3:
+            coluna = input(f"Escolha inválida! Escolha uma carta de 1 a 3: ")
+        coluna = int(coluna) - 1
+
+    t.verificarVizinhas(int(linha),int(coluna),p.deck[index])
+    p.deck.pop(index)
+
     return t
 
 
