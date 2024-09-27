@@ -57,7 +57,6 @@ def iniciarJogo():
     jogo.placarFinal(p1, p2)
 
     chave = input("Deseja jogar novamente? (S/N): ")
-    chave = chave.upper
     if chave == "S" or chave == "s":
         return True
     return False
@@ -83,6 +82,6 @@ Util.limpa()
 key = input("Deseja iniciar o jogo? (S/N): ")
 
 if key == "S" or key == "s":
-    while True:
-        if not iniciarJogo():
-            break
+    key = True
+    while key:
+        key = iniciarJogo()
