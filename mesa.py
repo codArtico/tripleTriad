@@ -18,7 +18,7 @@ class Mesa:
         carta.setDono(p)
         p.deck.append(carta)
 
-    #seleção de decks
+    # seleção de decks
     @staticmethod
     def selecionarCarta(p1, p2, mesa):
         for i in range(10):

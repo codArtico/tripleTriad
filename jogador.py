@@ -1,4 +1,6 @@
 from random import randint
+
+
 class Jogador:
     def __init__(self, cor, nome):
         self.nome = nome
@@ -9,7 +11,7 @@ class Jogador:
 
     # Sistema de funções do SWAP
     def cartaSwap(self, p):
-        index = randint(1,5)
+        index = randint(1, 5)
         carta = self.deck.pop(index - 1)
         carta.setDono(p)
         return carta

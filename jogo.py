@@ -12,34 +12,36 @@ def fazerDeck(p):
 
     return deck
 
+
 def receberLinha():
     x = Util.excecao("Escolha a linha de 1 a 3:")
     x -= 1
     return x
+
 
 def receberColuna():
     x = Util.excecao("Escolha a coluna de 1 a 3:")
     x -= 1
     return x
 
+
 # Realiza Jogada
-def realizarJogada(p,t):
+def realizarJogada(p, t):
     p.mostrarMao()
 
     index = Util.excecao(f"Escolha uma carta de 1 a {len(p.deck)}: ")
     index -= 1
 
     linha = receberLinha()
-    
+
     coluna = receberColuna()
 
     while not t.colocarCarta(int(linha), int(coluna), p.deck[index]):
-
         linha = receberLinha()
-    
+
         coluna = receberColuna()
 
-    t.verificarVizinhas(int(linha),int(coluna),p.deck[index])
+    t.verificarVizinhas(int(linha), int(coluna), p.deck[index])
     p.deck.pop(index)
 
     return t
