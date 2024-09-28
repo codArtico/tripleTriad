@@ -32,3 +32,12 @@ class Util:
             "  ██    ██   ██ ██  ██      ███████ ████████       ██    ██   ██ ██ ██   ██ ██████ "
         )
         print("")
+
+    @staticmethod
+    def excecao(mensagem):
+        while True:
+            try:
+                numero = int(input(mensagem))
+                return numero
+            except ValueError:
+                print("Por favor, digite um número válido")
