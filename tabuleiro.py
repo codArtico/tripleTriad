@@ -155,12 +155,3 @@ class Tabuleiro:
         self.imprimir_linha(0)
         self.imprimir_linha(1)
         self.imprimir_linha(2)
-
-    def swap(self, i, j, p1, p2):
-        v = []
-        v.append(p1.deck[i])
-        p1.deck.pop(i)
-        v.append(p2.deck[j])
-        p1.deck.pop(j)
-        p1.deck.append[v[1]]
-        p2.deck.append[v[0]]
