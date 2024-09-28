@@ -13,27 +13,21 @@ def fazerDeck(p):
     return deck
 
 def receberLinha():
-    x = input("Escolha a linha: ")
-    while not x.isnumeric() or int(x) < 1 or int(x) > 3:
-        x = input(f"Escolha inválida! Escolha uma linha de 1 a 3: ")
-    x = int(x) - 1
+    x = Util.excecao("Escolha a linha de 1 a 3:")
+    x -= 1
     return x
 
 def receberColuna():
-    x = input("Escolha a coluna: ")
-    while not x.isnumeric() or int(x) < 1 or int(x) > 3:
-        x = input(f"Escolha inválida! Escolha uma coluna de 1 a 3: ")
-    x = int(x) - 1
+    x = Util.excecao("Escolha a coluna de 1 a 3:")
+    x -= 1
     return x
 
 # Realiza Jogada
 def realizarJogada(p,t):
     p.mostrarMao()
 
-    index = input(f"Escolha uma carta de 1 a {len(p.deck)}: ")
-    while not index.isnumeric() or int(index) < 1 or int(index) > len(p.deck):
-        index = input(f"Escolha inválida! Escolha uma carta de 1 a {len(p.deck)}: ")
-    index = int(index) - 1
+    index = Util.excecao(f"Escolha uma carta de 1 a {len(p.deck)}: ")
+    index -= 1
 
     linha = receberLinha()
     

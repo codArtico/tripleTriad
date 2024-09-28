@@ -13,12 +13,8 @@ class Mesa:
     # seleciona a carta (Faz parte do selecionarCarta())
     @staticmethod
     def select(p, mesa):
-        index = input(f"{p.nome}, Escolha 1 carta de 1 a {len(mesa.deck)}: ")
-        while not index.isdigit() or int(index) < 1 or int(index) > len(mesa.deck):
-            index = input(
-                f"Escolha inválida! Escolha 1 carta de 1 a {len(mesa.deck)}: "
-            )
-        carta = mesa.deck.pop(int(index) - 1)
+        index = Util.excecao(f"{p.nome}, Escolha uma carta de 1 a {len(mesa.deck)}: ")
+        carta = mesa.deck.pop(index - 1)
         carta.setDono(p)
         p.deck.append(carta)
 
